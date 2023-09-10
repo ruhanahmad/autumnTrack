@@ -252,124 +252,137 @@ final Map<String, String> body = {
         // ],
         ),
         body: Center(
-          child: Column(
-
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Please fill out form below to post a shift',
-                style: TextStyle(fontSize: 15, ),
-              ),
-              SizedBox(height: 10),
-            GestureDetector(
-              onTap: () => _selectTime(context),
-              child: AbsorbPointer(
-                child: TextFormField(
-                   textAlign: TextAlign.center,
-                  controller: _timeController,
-                  decoration: InputDecoration(
-                    labelText: 'Start Time',
-                    hintText: 'Start Time',
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(
+          
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    'Please fill out form below to post a shift',
+                    style: TextStyle(fontSize: 15, ),
+                  ),
+                ),
+                SizedBox(height: 10),
+              GestureDetector(
+                onTap: () => _selectTime(context),
+                child: AbsorbPointer(
+                  child: TextFormField(
+                     textAlign: TextAlign.center,
+                    controller: _timeController,
+                    decoration: InputDecoration(
+                      labelText: 'Start Time',
+                      hintText: 'Start Time',
+                    ),
                   ),
                 ),
               ),
-            ),
-             SizedBox(height: 10),
-            GestureDetector(
-              onTap: () => _selectTimeEnd(context),
-              child: AbsorbPointer(
-                child: TextFormField(
-                textAlign: TextAlign.center,
-                  controller: _timeControllerEnd,
-                  decoration: InputDecoration(
-                    labelText: 'End Time',
-                    hintText: 'End Time',
-                  ),
-                ),
-              ),
-            ),
-             SizedBox(height: 10),
-             Text("Unit"),
                SizedBox(height: 10),
- Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed:_fetchFacilities,
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.orange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                            child: Text(
-                              'Select a unit',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_drop_down),
-                            onPressed: _fetchFacilities,
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 10),
-                       GestureDetector(
-              onTap: () => _selectDate(context),
-              child: AbsorbPointer(
-                child: TextFormField(
-                  controller: _dateController,
-                  decoration: InputDecoration(
-                    labelText: 'Select Date',
-                    hintText: 'Select Date',
+              GestureDetector(
+                onTap: () => _selectTimeEnd(context),
+                child: AbsorbPointer(
+                  child: TextFormField(
+                  textAlign: TextAlign.center,
+                    controller: _timeControllerEnd,
+                    decoration: InputDecoration(
+                      labelText: 'End Time',
+                      hintText: 'End Time',
+                    ),
                   ),
                 ),
               ),
-            ),
-
-                           SizedBox(height: 10),
- Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton(
-                            onPressed:_fetchFacilities,
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.orange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+               SizedBox(height: 10),
+               Text("Unit"),
+                 SizedBox(height: 10),
+           Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 300,
+                              child: ElevatedButton(
+                                onPressed:_fetchFacilities,
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.orange,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Select a unit',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
-                            child: Text(
-                              'Position',
-                              style: TextStyle(color: Colors.white),
+                            IconButton(
+                              icon: Icon(Icons.arrow_drop_down),
+                              onPressed: _fetchFacilities,
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_drop_down),
-                            onPressed: _fetchFacilities,
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+          
                         SizedBox(height: 10),
-                       ElevatedButton(
-                        onPressed: ()async{
-                  await  postShift();
-                },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(2.0),
+                         GestureDetector(
+                onTap: () => _selectDate(context),
+                child: AbsorbPointer(
+                  child: TextFormField(
+                    controller: _dateController,
+                    decoration: InputDecoration(
+                      labelText: 'Select Date',
+                      hintText: 'Select Date',
+                    ),
+                  ),
+                ),
+              ),
+          
+                             SizedBox(height: 10),
+           Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 300,
+                              child: ElevatedButton(
+                                onPressed:_fetchFacilities,
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.orange,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Position',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.arrow_drop_down),
+                              onPressed: _fetchFacilities,
+                            ),
+                          ],
+                        ),
+                          SizedBox(height: 10),
+                         ElevatedButton(
+                          onPressed: ()async{
+                    await  postShift();
+                  },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(2.0),
+                            ),
+                            minimumSize: Size(30, 40),
                           ),
-                          minimumSize: Size(30, 40),
+                          child: Text(
+                            'Post Shift',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        child: Text(
-                          'Post Shift',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
- 
-            ],
+           
+              ],
+            ),
           ),
         ),
       ),

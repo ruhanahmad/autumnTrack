@@ -24,7 +24,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
 
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-      print(jsonResponse['data']);
+      print(jsonResponse['appShifts']);
       return List<Map<String, dynamic>>.from(jsonResponse['appShifts']);
     } else {
       throw Exception('Failed to fetch pending shifts');
@@ -101,7 +101,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('My Pending Shifts',style: TextStyle(fontWeight: FontWeight.bold),),
+          title: Text('Pending Shifts',style: TextStyle(fontWeight: FontWeight.bold),),
           centerTitle: true,
            automaticallyImplyLeading: false,
         actions: [
@@ -179,22 +179,18 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
                         borderRadius: BorderRadius.circular(15),
                         elevation: 20,
                         child: Padding(
-                          padding: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.symmetric(horizontal:10.0,vertical: 10),
                           child: Container(
                             
                             // margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                             
                             child:
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                     
                               children: [
-  Text(
-                                                "Friday - (Today)",
-                                                style: TextStyle(
-                                                  color:  Colors.green ,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30,
-                                                ),
-                                              ),
+                                SizedBox(height: 20,),
+ 
                                 Padding(
                                   padding: const EdgeInsets.all(0.0),
                                   child: Row(
@@ -215,7 +211,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
                                     
                                               SizedBox(height: 3),
                                               Text(
-                                                shift['unit'],
+                                                shift['fname'] +" " + shift["lname"],
                                                 style: TextStyle(fontSize: 14),
                                               ),
                                      SizedBox(height: 3),

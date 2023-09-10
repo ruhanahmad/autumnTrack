@@ -207,20 +207,31 @@ bool bioMetricEnabled = false;
                     ),
                   ),
                   SizedBox(height: 20.0),
-
-                   ListTile(
-                    leading: Icon(Icons.lock),
-                    title: Text('Biometric Authentication'),
-                    trailing: CupertinoSwitch(
-                      value: bioMetricEnabled,
-                      onChanged: (bool value) {
-                        setState(() {
+ Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        
+                        
+                          Row(
+                            children: [
+                              Icon(Icons.lock),
+                                 SizedBox(width: 8,),
+                        Text('Biometric Authentication'),
+                            ],
+                          ),
+                     
+                         CupertinoSwitch(
+                                             value: bioMetricEnabled,
+                                             onChanged: (bool value) {
+                                               setState(() {
                           bioMetricEnabled = value;
-                        });
-                        SharedPreferencesService.saveBiometricStatus(value);
-                      },
+                                               });
+                                               SharedPreferencesService.saveBiometricStatus(value);
+                                             },
+                                           ),
+                      ],
                     ),
-                  ),
+                  
                     SizedBox(height: 20.0),
                   Row(
                     children: [
