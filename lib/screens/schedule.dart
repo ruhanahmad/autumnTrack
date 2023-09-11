@@ -300,7 +300,7 @@ final Map<String, String> body = {
                           children: [
                             SizedBox(
                               height: 50,
-                              width: 300,
+                              width: 350,
                               child: ElevatedButton(
                                 onPressed:_fetchFacilities,
                                 style: ElevatedButton.styleFrom(
@@ -315,10 +315,10 @@ final Map<String, String> body = {
                                 ),
                               ),
                             ),
-                            IconButton(
-                              icon: Icon(Icons.arrow_drop_down),
-                              onPressed: _fetchFacilities,
-                            ),
+                            // IconButton(
+                            //   icon: Icon(Icons.arrow_drop_down),
+                            //   onPressed: _fetchFacilities,
+                            // ),
                           ],
                         ),
           
@@ -342,7 +342,7 @@ final Map<String, String> body = {
                           children: [
                             SizedBox(
                               height: 50,
-                              width: 300,
+                              width: 350,
                               child: ElevatedButton(
                                 onPressed:_fetchFacilities,
                                 style: ElevatedButton.styleFrom(
@@ -352,34 +352,39 @@ final Map<String, String> body = {
                                   ),
                                 ),
                                 child: Text(
-                                  'Position',
+                                  'Select a Position',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
                             ),
-                            IconButton(
-                              icon: Icon(Icons.arrow_drop_down),
-                              onPressed: _fetchFacilities,
-                            ),
+                            // IconButton(
+                            //   icon: Icon(Icons.arrow_drop_down),
+                            //   onPressed: _fetchFacilities,
+                            // ),
                           ],
                         ),
+                        SizedBox(height: 10,),
                           SizedBox(height: 10),
-                         ElevatedButton(
-                          onPressed: ()async{
-                    await  postShift();
-                  },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(2.0),
+                         SizedBox(
+                          height: 50,
+                          width: 380,
+                           child: ElevatedButton(
+                            onPressed: ()async{
+                                             await  postShift();
+                                           },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(2.0),
+                              ),
+                              minimumSize: Size(30, 40),
                             ),
-                            minimumSize: Size(30, 40),
-                          ),
-                          child: Text(
-                            'Post Shift',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                            child: Text(
+                              'Post Shift',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                                                 ),
+                         ),
            
               ],
             ),

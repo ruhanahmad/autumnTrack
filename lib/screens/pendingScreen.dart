@@ -42,17 +42,21 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       print(jsonResponse);
-           _showSnackbars('decline Successful ');
-      // String message = jsonResponse['message'];
+      //     _showSnackbars('decline Successful ');
+      String message = jsonResponse['message'];
 
-      // if (message == 'Success') {
-      //    _showSnackbars('Cancelled Successful ');
+      if (message == 'Shift Declined') {
+         _showSnackbars('Shift Declined ');
+
+         setState(() {
+           
+         });
  
-      //   // Redirect to login screen or navigate back to previous screen
-      // }
-      //  else {
-      //   _showSnackbar('Request failed. Please try again.');
-      // }
+        // Redirect to login screen or navigate back to previous screen
+      }
+       else {
+        _showSnackbar('Request failed. Please try again.');
+      }
     } else {
       _showSnackbar('Error occurred. Please try again later.');
     }
@@ -68,18 +72,21 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
     final response = await http.post(Uri.parse(apiUrl));
     print(response.statusCode);
     if (response.statusCode == 200) {
-      // final jsonResponse = json.decode(response.body);
-      // print(jsonResponse);
-             _showSnackbars('Approve Successfull ');
-      // String message = jsonResponse['message'];
+      final jsonResponse = json.decode(response.body);
+      print(jsonResponse);
+            //  _showSnackbars('Approve Successfull ');
+      String message = jsonResponse['message'];
 
-      // if (message == 'Success') {
-      //    _showSnackbars('Cancelled Successful ');
- 
-      //   // Redirect to login screen or navigate back to previous screen
-      // } else {
-      //   _showSnackbar('Request failed. Please try again.');
-      // }
+      if (message == 'Shift Approved') {
+         _showSnackbars('Approved Successful ');
+         
+         setState(() {
+           
+         });
+        // Redirect to login screen or navigate back to previous screen
+      } else {
+        _showSnackbar('Request failed. Please try again.');
+      }
     } else {
       _showSnackbar('Error occurred. Please try again later.');
     }
@@ -325,6 +332,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
                         onPressed: ()async{
                   // await  postShift();
                   await approveShift();
+
                 },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,

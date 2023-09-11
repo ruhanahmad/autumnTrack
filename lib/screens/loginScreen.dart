@@ -108,6 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
         userContoller.fname = fname;
         userContoller.lname = lname;
         userContoller.update();
+        int.parse(role) >= 5 ?
         Get.to(
           () => NavigationBarScreen(
             fname: fname,
@@ -119,7 +120,11 @@ class _LoginScreenState extends State<LoginScreen> {
             employeeKey: employeeKey,
             playerID: playerID,
           ),
-        );
+        )
+        :
+        Get.snackbar("Error", "You dont have access")
+        
+        ;
         _logins(password, email);
       } else {
         _showSnackbar('Please Provide Correct Credientials');
