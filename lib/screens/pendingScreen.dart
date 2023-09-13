@@ -31,10 +31,10 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
     }
   }
 
-   Future<void> _declineShift() async {
+   Future<void> _declineShift(String id) async {
    
-
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/decline/?apikey=MYhsie8n4&id=1234';
+print(id);
+    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/decline/?apikey=MYhsie8n4&id=$id';
     
 
     final response = await http.post(Uri.parse(apiUrl));
@@ -63,10 +63,10 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
   }
 
 
-  Future<void> approveShift() async {
+  Future<void> approveShift(String id) async {
    
-
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/approve/?apikey=MYhsie8n4&id=1234';
+print(id);
+    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/approve/?apikey=MYhsie8n4&id=$id';
     
 
     final response = await http.post(Uri.parse(apiUrl));
@@ -231,7 +231,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
                                                               ElevatedButton(
                         onPressed: ()async{
                   // await  postShift();
-                  await _declineShift();
+                  await _declineShift(shift["id"]);
                 },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.red,
@@ -331,7 +331,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
                                                               ElevatedButton(
                         onPressed: ()async{
                   // await  postShift();
-                  await approveShift();
+                  await approveShift(shift["id"]);
 
                 },
                         style: ElevatedButton.styleFrom(

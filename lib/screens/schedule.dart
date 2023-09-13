@@ -93,6 +93,36 @@ String convertTo12HourFormat(String time24Hour) {
   }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+
+List<dynamic> positions = [];
+ String selectedPosition= '';
+ 
+    Future<void> _fetchPositions() async {
+    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/positions/?apikey=MYhsie8n4';
+
+    final response = await http.get(Uri.parse(apiUrl));
+
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      List<dynamic> facilityData = jsonResponse['data'];
+
+      setState(() {
+        positions = facilityData.map((facility) => facility['position']).toList();
+      });
+
+      _showPositionsBottomSheet();
+    } else {
+      // Handle error if API request fails
+      _showErrorSnackbar();
+    }
+  }
+
+
+
+
+
 
 
 
@@ -121,7 +151,7 @@ List<dynamic> facilities = [];
  String selectedFacility = '';
  
     Future<void> _fetchFacilities() async {
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/facilities/?apikey=MYhsie8n4';
+    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/units/?apikey=MYhsie8n4&fac=A Autumn Demo';
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -130,7 +160,7 @@ List<dynamic> facilities = [];
       List<dynamic> facilityData = jsonResponse['data'];
 
       setState(() {
-        facilities = facilityData.map((facility) => facility['fac']).toList();
+        facilities = facilityData.map((facility) => facility['unit']).toList();
       });
 
       _showFacilitiesBottomSheet();
@@ -172,6 +202,35 @@ List<dynamic> facilities = [];
     );
   }
 
+
+
+
+
+
+
+   void _showPositionsBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return ListView(
+          children: positions.map((fac) {
+            return ListTile(
+              title: Text(fac),
+              onTap: () {
+                 setState(() {
+                  selectedPosition = fac;
+                });
+                print( selectedFacility);
+                // Handle selection if needed
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
   Future<List<Map<String, dynamic>>> fetchScheduledShifts() async {
     final apiUrl =
         'https://sandbox1.autumntrack.com/api/v2/schedule/?apikey=MYhsie8n4&email=${userContoller.email}';
@@ -197,11 +256,11 @@ final Map<String, String> body = {
         // 'user': _emailController.text,
         // 'pass': _passwordController.text,
         // 'player_id': 'sadas',
-        'unit': "Floor 1",
+        'unit': selectedFacility,
         'time_start': "{$_selectedTime}",
         'time_end': "{$_selectedTime}",
         "date":"{$_selectedDate}",
-        "pos":"RN"
+        "pos":selectedPosition
       };
     final response = await http.post(Uri.parse(apiUrl),  body: body,);
     print(response.statusCode);
@@ -323,6 +382,8 @@ final Map<String, String> body = {
                         ),
           
                         SizedBox(height: 10),
+                        selectedFacility == "" ? Center(child: Text("No Unit Selected")) : Center(child: Text("${selectedFacility}")),
+                           SizedBox(height: 10),
                          GestureDetector(
                 onTap: () => _selectDate(context),
                 child: AbsorbPointer(
@@ -344,7 +405,7 @@ final Map<String, String> body = {
                               height: 50,
                               width: 350,
                               child: ElevatedButton(
-                                onPressed:_fetchFacilities,
+                                onPressed:_fetchPositions,
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.orange,
                                   shape: RoundedRectangleBorder(
@@ -364,13 +425,21 @@ final Map<String, String> body = {
                           ],
                         ),
                         SizedBox(height: 10,),
+                         selectedPosition == "" ? Center(child: Text("No Position Selected")) : Center(child: Text("${selectedPosition}")),
                           SizedBox(height: 10),
                          SizedBox(
                           height: 50,
                           width: 380,
                            child: ElevatedButton(
                             onPressed: ()async{
-                                             await  postShift();
+                              if(_timeController.text == "" || _timeControllerEnd.text == "" || selectedFacility == "" || _dateController.text == "" || selectedPosition == "" ){
+                                Get.snackbar("Error", "You Must input all feilds");
+                              }
+
+                              else {
+                                await  postShift();
+                              }
+                                             
                                            },
                             style: ElevatedButton.styleFrom(
                               primary: Colors.green,
