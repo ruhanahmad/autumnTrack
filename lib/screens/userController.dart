@@ -21,7 +21,7 @@ String lname = "";
   final email = 'demo@autumnhc.net';
   final date = DateFormat('yyyy-MM-dd').format(selectedDate);
 
-  final apiUrl = Uri.parse('https://sandbox1.autumntrack.com/api/v2/week-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$date');
+  final apiUrl = Uri.parse('https://scheduler.autumntrack.com/api/v2/week-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$date');
 try {
     final response = await http.post(apiUrl);
    

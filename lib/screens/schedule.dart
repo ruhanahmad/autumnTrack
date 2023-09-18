@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -18,7 +19,7 @@ class _ScheduledScreenState extends State<ScheduledScreen> {
 
    UserContoller userContoller = Get.put(UserContoller()); 
 
-
+  bool isLoading =  true;
 
   TimeOfDay? _selectedTime;
   TextEditingController _timeController = TextEditingController();
@@ -100,7 +101,7 @@ List<dynamic> positions = [];
  String selectedPosition= '';
  
     Future<void> _fetchPositions() async {
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/positions/?apikey=MYhsie8n4';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/manager/positions/?apikey=MYhsie8n4';
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -132,6 +133,8 @@ List<dynamic> positions = [];
    DateTime? _selectedDate;
   TextEditingController _dateController = TextEditingController();
 
+  String formateDate="";
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -143,7 +146,11 @@ List<dynamic> positions = [];
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
-        _dateController.text = "${picked.toLocal()}".split(' ')[0];
+        // _dateController.text = "${picked.toLocal()}".split(' ')[0];
+              _dateController.text = "${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}";
+              // formateDate= "${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}";
+               formateDate = DateFormat('yyyy-MM-dd').format(_selectedDate!);
+              print(_dateController.text);
       });
     }
   }
@@ -151,7 +158,7 @@ List<dynamic> facilities = [];
  String selectedFacility = '';
  
     Future<void> _fetchFacilities() async {
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/units/?apikey=MYhsie8n4&fac=A Autumn Demo';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/manager/units/?apikey=MYhsie8n4&fac=A Autumn Demo';
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -233,7 +240,7 @@ List<dynamic> facilities = [];
 
   Future<List<Map<String, dynamic>>> fetchScheduledShifts() async {
     final apiUrl =
-        'https://sandbox1.autumntrack.com/api/v2/schedule/?apikey=MYhsie8n4&email=${userContoller.email}';
+        'https://scheduler.autumntrack.com/api/v2/schedule/?apikey=MYhsie8n4&email=${userContoller.email}';
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -249,8 +256,11 @@ List<dynamic> facilities = [];
 
    Future<void> postShift() async {
    
-
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/post-shift/?apikey=MYhsie8n4&id=4964&fac=A Autumn Demo';
+   setState(() {
+  isLoading = false;
+});
+ 
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/manager/post-shift/?apikey=MYhsie8n4&id=4964&fac=A Autumn Demo';
     
 final Map<String, String> body = {
         // 'user': _emailController.text,
@@ -258,26 +268,38 @@ final Map<String, String> body = {
         // 'player_id': 'sadas',
         'unit': selectedFacility,
         'time_start': "{$_selectedTime}",
-        'time_end': "{$_selectedTime}",
-        "date":"{$_selectedDate}",
+        'time_end': "{$_selectedTimeEnd}",
+        "date":"${formateDate}",
         "pos":selectedPosition
       };
     final response = await http.post(Uri.parse(apiUrl),  body: body,);
     print(response.statusCode);
     if (response.statusCode == 200) {
+        
       final jsonResponse = json.decode(response.body);
       print(jsonResponse);
       String message = jsonResponse['message'];
 
       if (message == 'Shift Posted') {
          _showSnackbars('Shift Posted Successful ');
+  setState(() {
+  isLoading = true;
+});
+
+// EasyLoading.dismiss();
  
         // Redirect to login screen or navigate back to previous screen
       } else {
         _showSnackbar('Request failed. Please try again.');
+      setState(() {
+  isLoading = true;
+});
       }
     } else {
       _showSnackbar('Error occurred. Please try again later.');
+      setState(() {
+  isLoading = true;
+});
     }
   }
   void _showSnackbars(String message) {
@@ -300,24 +322,21 @@ final Map<String, String> body = {
           title: Text("Post a Shift",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
           centerTitle: true,
           automaticallyImplyLeading: false,
-        //           actions: [
-        //   IconButton(
-        //     icon: Icon(Icons.refresh),
-        //     onPressed: () {
-        //       // Call fetchData() and trigger a refresh
-        //       setState(() {});
-        //     },
-        //   ),
-        // ],
+ actions: [
+  IconButton(onPressed: (){
+  
+  }, icon:Icon(Icons.abc_outlined))
+ ],
         ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(30.0),
             child: Column(
-          
+          // ya dykho 
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
+                  
                   child: Text(
                     'Please fill out form below to post a shift',
                     style: TextStyle(fontSize: 15, ),
@@ -427,17 +446,31 @@ final Map<String, String> body = {
                         SizedBox(height: 10,),
                          selectedPosition == "" ? Center(child: Text("No Position Selected")) : Center(child: Text("${selectedPosition}")),
                           SizedBox(height: 10),
-                         SizedBox(
+                       isLoading ==  true?  SizedBox(
                           height: 50,
                           width: 380,
                            child: ElevatedButton(
                             onPressed: ()async{
                               if(_timeController.text == "" || _timeControllerEnd.text == "" || selectedFacility == "" || _dateController.text == "" || selectedPosition == "" ){
                                 Get.snackbar("Error", "You Must input all feilds");
+                              
                               }
 
                               else {
                                 await  postShift();
+
+                                _timeController.text = "" ; _timeControllerEnd.text = "" ; selectedFacility = "" ; _dateController.text = "" ; selectedPosition = "" ;
+                            // yaha lgaya mai  
+                            // whatsapp  
+                            //  yehi idhar hi likho mene full sceen kia hay full focus on here
+                            /// ha to dykho na bi nh ho rha refreesh ok let me chek doemu
+                            /// emualator kholein
+                            /// betaa mera betaa shabaash
+         setState(() {
+           print("setstate called");
+          /// q haath maari jarai ho 
+          /// nh mara 
+         });
                               }
                                              
                                            },
@@ -453,7 +486,13 @@ final Map<String, String> body = {
                               style: TextStyle(color: Colors.white),
                             ),
                                                  ),
-                         ),
+                         ):
+                         Center(
+  child: CircularProgressIndicator(
+    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF985E3D)),
+    strokeWidth: 5.0,
+  ),
+)
            
               ],
             ),

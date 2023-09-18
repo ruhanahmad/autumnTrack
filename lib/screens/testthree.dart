@@ -79,7 +79,7 @@
 //     final email = 'demo@autumnhc.net';
 //     final date = DateFormat('yyyy-MM-dd').format(selectedDate);
 
-//     final apiUrl = Uri.parse('https://sandbox1.autumntrack.com/api/v2/week-open-shifts/?apikey=$apiKey&email=$email&date=$date');
+//     final apiUrl = Uri.parse('https://scheduler.autumntrack.com/api/v2/week-open-shifts/?apikey=$apiKey&email=$email&date=$date');
 
 //     try {
 //       final response = await http.get(apiUrl);
@@ -104,7 +104,7 @@
 //   final email = 'demo@autumnhc.net';
 //   final date = DateFormat('yyyy-MM-dd').format(selectedDate);
 
-//   final apiUrl = Uri.parse('https://sandbox1.autumntrack.com/api/v2/week-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$date');
+//   final apiUrl = Uri.parse('https://scheduler.autumntrack.com/api/v2/week-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$date');
 // try {
 //     final response = await http.post(apiUrl);
    
@@ -159,7 +159,7 @@
 //   // Function to fetch data from the API
 // //  Future<List<Map<String, dynamic>>> fetchShifts() async {
 // //    final String apiUrl =
-// //       'https://sandbox1.autumntrack.com/api/v2/user-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$formatDateVar';
+// //       'https://scheduler.autumntrack.com/api/v2/user-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$formatDateVar';
 // //     try {
 // //       final response = await http.get(Uri.parse(apiUrl));
 
@@ -183,7 +183,7 @@
 //  UserContoller userContoller = Get.put(UserContoller()); 
 //  Future<List<Map<String, dynamic>>> fetchShifts() async {
 //   print(userContoller.email);
-//     final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/user-open-shifts/?apikey=MYhsie8n4&email=${userContoller.email}&date=$formatDateVar';
+//     final apiUrl = 'https://scheduler.autumntrack.com/api/v2/user-open-shifts/?apikey=MYhsie8n4&email=${userContoller.email}&date=$formatDateVar';
 //  try {
 //     final response = await http.post(Uri.parse(apiUrl));
 //  print(response.statusCode);
@@ -220,7 +220,7 @@
 
 // Future<Map<String, dynamic>> acceptInvitation(String id, String userInstantAccept) async {
 
-//     final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/accept/?apikey=MYhsie8n4&id=$id&user_instant_accept=$userInstantAccept&empkey=13110';
+//     final apiUrl = 'https://scheduler.autumntrack.com/api/v2/accept/?apikey=MYhsie8n4&id=$id&user_instant_accept=$userInstantAccept&empkey=13110';
 
 //     final response = await http.post(Uri.parse(apiUrl));
 
@@ -235,7 +235,7 @@
 
 //   acceptInvitations() async {
 
-//     final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/accept/?apikey=MYhsie8n4&id=1734&user_instant_accept=0&empkey=13110';
+//     final apiUrl = 'https://scheduler.autumntrack.com/api/v2/accept/?apikey=MYhsie8n4&id=1734&user_instant_accept=0&empkey=13110';
     
 
 //     final response = await http.post(Uri.parse(apiUrl));
@@ -560,7 +560,7 @@
 //   final email = 'demo@autumnhc.net';
 //   final date = DateFormat('yyyy-MM-dd').format(widget.selectedDate);
 
-//   final apiUrl = Uri.parse('https://sandbox1.autumntrack.com/api/v2/week-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$date');
+//   final apiUrl = Uri.parse('https://scheduler.autumntrack.com/api/v2/week-open-shifts/?apikey=MYhsie8n4&email=demo@autumnhc.net&date=$date');
 // try {
 //     final response = await http.post(apiUrl);
    

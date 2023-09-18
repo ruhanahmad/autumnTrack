@@ -28,7 +28,7 @@ class _ResetScreenState extends State<ResetScreen> {
       return;
     }
 
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/reset/?apikey=MYhsie8n4';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/reset/?apikey=MYhsie8n4';
     final Map<String, dynamic> requestData = {
       "id": "1739",
       "email": email,

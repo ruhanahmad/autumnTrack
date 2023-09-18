@@ -18,7 +18,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
 
   Future<List<Map<String, dynamic>>> fetchPendingShifts() async {
     final apiUrl =
-        'https://sandbox1.autumntrack.com/api/v2/manager/pending/?apikey=MYhsie8n4&fac=A Autumn Demo';
+        'https://scheduler.autumntrack.com/api/v2/manager/pending/?apikey=MYhsie8n4&fac=A Autumn Demo';
 
     final response = await http.get(Uri.parse(apiUrl));
 
@@ -34,7 +34,7 @@ class _MyShiftsScreenState extends State<MyShiftsScreen> {
    Future<void> _declineShift(String id) async {
    
 print(id);
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/decline/?apikey=MYhsie8n4&id=$id';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/manager/decline/?apikey=MYhsie8n4&id=$id';
     
 
     final response = await http.post(Uri.parse(apiUrl));
@@ -66,7 +66,7 @@ print(id);
   Future<void> approveShift(String id) async {
    
 print(id);
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/manager/approve/?apikey=MYhsie8n4&id=$id';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/manager/approve/?apikey=MYhsie8n4&id=$id';
     
 
     final response = await http.post(Uri.parse(apiUrl));

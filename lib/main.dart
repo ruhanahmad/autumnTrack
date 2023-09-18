@@ -3,6 +3,7 @@ import 'package:autumntrackmanagers/screens/loginScreen.dart';
 import 'package:autumntrackmanagers/screens/test.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
       ),
       home:
       LoginScreen(),
+        builder: EasyLoading.init(),
       // BiometricPermissionPage(),
     );
   }

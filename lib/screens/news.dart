@@ -10,7 +10,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   Future<List<Map<String, dynamic>>> fetchNews() async {
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/news/?apikey=MYhsie8n4&fac=Autumn%20Demo&position=RN';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/news/?apikey=MYhsie8n4&fac=Autumn%20Demo&position=RN';
 
     final response = await http.get(Uri.parse(apiUrl));
 

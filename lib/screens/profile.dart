@@ -29,7 +29,7 @@ UserContoller userContoller = Get.put(UserContoller());
       return;
     }
     final String apiUrl =
-        'https://sandbox1.autumntrack.com/api/v2/support/?apikey=MYhsie8n4';
+        'https://scheduler.autumntrack.com/api/v2/support/?apikey=MYhsie8n4';
 
     final response = await http.post(
       Uri.parse(apiUrl),
@@ -64,7 +64,7 @@ UserContoller userContoller = Get.put(UserContoller());
   Future<void> _requestCredentials() async {
    
 
-    final apiUrl = 'https://sandbox1.autumntrack.com/api/v2/close_account/?apikey=MYhsie8n4&email=${userContoller.email}';
+    final apiUrl = 'https://scheduler.autumntrack.com/api/v2/close_account/?apikey=MYhsie8n4&email=${userContoller.email}';
     
 
     final response = await http.post(Uri.parse(apiUrl));
@@ -232,18 +232,18 @@ bool bioMetricEnabled = false;
                       ],
                     ),
                   
-                    SizedBox(height: 20.0),
-                  Row(
-                    children: [
+                    // SizedBox(height: 20.0),
+                  // Row(
+                  //   children: [
                      
                      
-                         Icon(Icons.delete, color: Colors.red),
+                  //        Icon(Icons.delete, color: Colors.red),
                      
                      
-                      SizedBox(width: 8.0),
-                      Text('Remove Face ID>>'),
-                    ],
-                  ),
+                  //     SizedBox(width: 8.0),
+                  //     Text('Remove Face ID>>'),
+                  //   ],
+                  // ),
                   SizedBox(height: 20.0),
                   GestureDetector(
                     onTap: () {
